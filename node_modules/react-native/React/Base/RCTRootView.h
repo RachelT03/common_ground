@@ -1,5 +1,5 @@
-/*
- * Copyright (c) Meta Platforms, Inc. and affiliates.
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,8 +8,6 @@
 #import <UIKit/UIKit.h>
 
 #import <React/RCTBridge.h>
-#import <React/RCTBridgeModule.h>
-#import <React/RCTEventDispatcherProtocol.h>
 
 @protocol RCTRootViewDelegate;
 
@@ -21,9 +19,9 @@
  * rootViewDidChangeIntrinsicSize method of the RCTRootViewDelegate will be called.
  */
 typedef NS_ENUM(NSInteger, RCTRootViewSizeFlexibility) {
-  RCTRootViewSizeFlexibilityNone = 0,
-  RCTRootViewSizeFlexibilityWidth = 1 << 0,
-  RCTRootViewSizeFlexibilityHeight = 1 << 1,
+  RCTRootViewSizeFlexibilityNone           = 0,
+  RCTRootViewSizeFlexibilityWidth          = 1 << 0,
+  RCTRootViewSizeFlexibilityHeight         = 1 << 1,
   RCTRootViewSizeFlexibilityWidthAndHeight = RCTRootViewSizeFlexibilityWidth | RCTRootViewSizeFlexibilityHeight,
 };
 
@@ -38,9 +36,9 @@ extern "C"
 extern
 #endif
 
-    NS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
-        NSString *const RCTContentDidAppearNotification;
+NSString *const RCTContentDidAppearNotification;
 
 /**
  * Native view used to host React-managed views within the app. Can be used just
@@ -52,18 +50,9 @@ extern
 /**
  * - Designated initializer -
  */
-- (instancetype)initWithFrame:(CGRect)frame
-                       bridge:(RCTBridge *)bridge
-                   moduleName:(NSString *)moduleName
-            initialProperties:(nullable NSDictionary *)initialProperties NS_DESIGNATED_INITIALIZER;
-
-/**
- * - Convenience initializer -
- * The frame will default to CGRectZero.
- */
 - (instancetype)initWithBridge:(RCTBridge *)bridge
                     moduleName:(NSString *)moduleName
-             initialProperties:(nullable NSDictionary *)initialProperties;
+             initialProperties:(nullable NSDictionary *)initialProperties NS_DESIGNATED_INITIALIZER;
 
 /**
  * - Convenience initializer -
@@ -77,18 +66,6 @@ extern
                 initialProperties:(nullable NSDictionary *)initialProperties
                     launchOptions:(nullable NSDictionary *)launchOptions;
 
-/**
- * This API allows RCTRootView users to know if the root view is backed by the bridge.
- */
-@property (nonatomic, readonly) BOOL hasBridge;
-
-/**
- * This API allows users of RCTRootView to access other NativeModules, without
- * directly accessing the bridge.
- */
-@property (nonatomic, strong, readonly) RCTModuleRegistry *moduleRegistry;
-
-@property (nonatomic, strong, readonly) id<RCTEventDispatcherProtocol> eventDispatcher;
 
 /**
  * The name of the JavaScript module to execute within the
@@ -117,11 +94,6 @@ extern
  * The size flexibility mode of the root view.
  */
 @property (nonatomic, assign) RCTRootViewSizeFlexibility sizeFlexibility;
-
-/*
- * The minimum size of the root view, defaults to CGSizeZero.
- */
-@property (nonatomic, assign) CGSize minimumSize;
 
 /**
  * The delegate that handles intrinsic size updates.
@@ -174,7 +146,8 @@ extern
  * This property is deprecated and will be removed in next releases.
  * Use UIKit `intrinsicContentSize` property instead.
  */
-@property (readonly, nonatomic, assign) CGSize intrinsicSize __deprecated_msg("Use `intrinsicContentSize` instead.");
+@property (readonly, nonatomic, assign) CGSize intrinsicSize
+__deprecated_msg("Use `intrinsicContentSize` instead.");
 
 /**
  * This methods is deprecated and will be removed soon.

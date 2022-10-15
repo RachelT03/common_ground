@@ -1,5 +1,5 @@
-/*
- * Copyright (c) Meta Platforms, Inc. and affiliates.
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -117,10 +117,9 @@
  * Accessibility properties
  */
 @property (nonatomic, copy) NSString *accessibilityRole;
+@property (nonatomic, copy) NSArray <NSString *> *accessibilityStates;
 @property (nonatomic, copy) NSDictionary<NSString *, id> *accessibilityState;
-@property (nonatomic, copy) NSArray<NSDictionary *> *accessibilityActions;
-@property (nonatomic, copy) NSDictionary *accessibilityValueInternal;
-@property (nonatomic, copy) NSString *accessibilityLanguage;
+@property (nonatomic, copy) NSArray <NSDictionary *> *accessibilityActions;
 
 /**
  * Used in debugging to get a description of the view hierarchy rooted at
